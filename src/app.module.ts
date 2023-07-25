@@ -9,8 +9,8 @@ import { UserModule } from './user/user.module';
   providers: [],
   imports: [
     ConfigModule.forRoot({
-      // envFilePath: `$.${process.env.NODE_ENV}.env`,
-      envFilePath: `.env`,
+      envFilePath: `.${process.env.NODE_ENV}.env`,
+      // envFilePath: `.env`,
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
