@@ -3,6 +3,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule } from '@nestjs/config';
 
 import { UserModule } from './user/user.module';
+import { User } from './user/model/user.model';
 
 @Module({
   controllers: [],
@@ -23,7 +24,7 @@ import { UserModule } from './user/user.module';
         // Додаємо параметр pass для передачі пароля
         pass: process.env.POSTGRES_PASSWORD,
       },
-      models: [],
+      models: [User],
       autoLoadModels: true,
     }),
     UserModule,
