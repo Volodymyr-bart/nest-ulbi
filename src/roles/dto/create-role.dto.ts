@@ -1,1 +1,4 @@
-export class CreateRoleDto {}
+export class CreateRoleDto {
+  readonly valude: string;
+  readonly description: string;
+}

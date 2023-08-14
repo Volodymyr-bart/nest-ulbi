@@ -20,8 +20,8 @@ export class RolesController {
     return this.rolesService.createRole(createRoleDto);
   }
 
-  @Get()
-  getRoleByValue(value: string) {
+  @Get('/:value')
+  getRoleByValue(@Param('value') value: string) {
     return this.rolesService.getRoleByValue(value);
   }
 }
