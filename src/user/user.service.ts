@@ -8,12 +8,14 @@ import { InjectModel } from '@nestjs/sequelize';
 export class UserService {
   constructor(@InjectModel(User) private userRepository: typeof User) {}
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  async create(dto: CreateUserDto) {
+    const user = await this.userRepository.create(dto);
+    return user;
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async getAllUsers() {
+    const users = await this.userRepository.findAll();
+    return users;
   }
 
   findOne(id: number) {

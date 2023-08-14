@@ -3,7 +3,10 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule } from '@nestjs/config';
 
 import { UserModule } from './user/user.module';
+import { RolesModule } from './roles/roles.module';
 import { User } from './user/model/user.model';
+import { Role } from './roles/model/roles.model';
+import { UserRoles } from './roles/model/user-roles.model';
 
 @Module({
   controllers: [],
@@ -24,10 +27,11 @@ import { User } from './user/model/user.model';
         // Додаємо параметр pass для передачі пароля
         pass: process.env.POSTGRES_PASSWORD,
       },
-      models: [User],
+      models: [User, Role, UserRoles],
       autoLoadModels: true,
     }),
     UserModule,
+    RolesModule,
   ],
 })
 export class AppModule {}
