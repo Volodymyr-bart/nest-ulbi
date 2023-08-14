@@ -16,6 +16,7 @@ export class UserService {
     const user = await this.userRepository.create(dto);
     const role = await this.rolesService.getRoleByValue('USER');
     await user.$set('roles', [role.id]);
+    user.roles = [role];
     return user;
   }
 
@@ -24,15 +25,11 @@ export class UserService {
     return users;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async getUserByEmail(email: string) {
+    const user = await this.userRepository.findOne({
+      where: { email },
+      include: { all: true },
+    });
+    return user;
   }
 }
