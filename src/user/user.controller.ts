@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  UsePipes,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -18,14 +19,16 @@ import { RolesGuard } from 'src/auth/roles.guard';
 import { Roles } from 'src/auth/roles-auth.decorator';
 import { AddRoleDto } from './dto/add-role.dto';
 import { BanUserDto } from './dto/ban-user.dto';
+import { ValidationPipe } from 'src/pipes/validation.pipe';
 
-@ApiTags('Users')
+@ApiTags('User')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @ApiOperation({ summary: 'Create user' })
   @ApiResponse({ status: 201, type: User })
+  @UsePipes(ValidationPipe)
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);

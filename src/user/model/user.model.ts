@@ -3,9 +3,12 @@ import {
   BelongsToMany,
   Column,
   DataType,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
+import { Post } from 'src/posts/model/posts.model';
+
 import { Role } from 'src/roles/model/roles.model';
 import { UserRoles } from 'src/roles/model/user-roles.model';
 
@@ -56,4 +59,7 @@ export class User extends Model<User, UserCreationAttrs> {
 
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];
+
+  @HasMany(() => Post)
+  posts: Post[];
 }
